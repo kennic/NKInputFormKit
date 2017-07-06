@@ -1,5 +1,5 @@
 //
-//  InputFormViewController.swift
+//  NKInputFormViewController.swift
 //  NKInputFormKit
 //
 //  Created by Nam Kennic on 6/10/16.

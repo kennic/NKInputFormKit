@@ -1,0 +1,348 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 11,
+      "symbol": "NKInputFormViewController",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 12,
+      "symbol": "NKInputFormViewController.inputFormView",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 13,
+      "symbol": "NKInputFormViewController.animationWhenPoppingBack",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 14,
+      "symbol": "NKInputFormViewController.animationDuration",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 15,
+      "symbol": "NKInputFormViewController.spaceBetweenLowestViewAndKeyboard",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 16,
+      "symbol": "NKInputFormViewController.keyboardFrame",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 17,
+      "symbol": "NKInputFormViewController.autoPushUpWhenShowingKeyboard",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 23,
+      "symbol": "NKInputFormViewController.loading",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 60,
+      "symbol": "NKInputFormViewController.submitAction()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 69,
+      "symbol": "NKInputFormViewController.cancelAction()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 73,
+      "symbol": "NKInputFormViewController.dismiss(animated:completion:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 78,
+      "symbol": "NKInputFormViewController.dismissViewControllerAnimated(_:completion:forceDismissing:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 102,
+      "symbol": "NKInputFormViewController.popToRootViewControllerAnimated(_:completion:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 113,
+      "symbol": "NKInputFormViewController.validateViewSize()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 119,
+      "symbol": "NKInputFormViewController.viewWillAppear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 124,
+      "symbol": "NKInputFormViewController.viewDidAppear(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 132,
+      "symbol": "NKInputFormViewController.viewDidLayoutSubviews()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 137,
+      "symbol": "NKInputFormViewController.preferredContentSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 148,
+      "symbol": "NKInputFormViewController.prefersStatusBarHidden",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 170,
+      "symbol": "NKInputFormViewController.gestureRecognizer(_:shouldReceive:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 176,
+      "symbol": "NKInputFormViewController.textFieldShouldBeginEditing(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 180,
+      "symbol": "NKInputFormViewController.textFieldDidBeginEditing(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 184,
+      "symbol": "NKInputFormViewController.textFieldShouldReturn(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 197,
+      "symbol": "NKInputFormViewController.dismissKeyboard()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 201,
+      "symbol": "NKInputFormViewController.registerForKeyboardNotifications()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 270,
+      "symbol": "NKInputFormViewController.visibleKeyboardHeight",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 282,
+      "symbol": "NKInputFormViewController.currentFirstResponder",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 304,
+      "symbol": "NKInputFormViewController.shouldAutorotate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 308,
+      "symbol": "NKInputFormViewController.supportedInterfaceOrientations",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 312,
+      "symbol": "NKInputFormViewController.preferredInterfaceOrientationForPresentation",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 318,
+      "symbol": "NKInputFormViewController.navigationController(_:didShow:animated:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 325,
+      "symbol": "NKInputFormViewController.tapToDismissKeyboard",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 348,
+      "symbol": "NKInputFormButtonTag",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 349,
+      "symbol": "NKInputFormButtonTag.cancel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 350,
+      "symbol": "NKInputFormButtonTag.submit",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 353,
+      "symbol": "NKInputFormView",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 366,
+      "symbol": "NKInputFormView.allTextFields",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 372,
+      "symbol": "NKInputFormView.allButtons",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 378,
+      "symbol": "NKInputFormView.allControls",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 384,
+      "symbol": "NKInputFormView.enabled",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 405,
+      "symbol": "NKInputFormView.editable",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 420,
+      "symbol": "NKInputFormView.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 433,
+      "symbol": "NKInputFormView.init(coder:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 437,
+      "symbol": "NKInputFormView.addSubview(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 455,
+      "symbol": "NKInputFormView.nextResponderFromResponder(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 463,
+      "symbol": "NKInputFormView.lowestView()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 467,
+      "symbol": "NKInputFormView.registerTouchEventForAllButtonsWithTarget(_:selector:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 473,
+      "symbol": "NKInputFormView.unregisterTouchEventForAllButtonsWithTarget(_:selector:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 479,
+      "symbol": "NKInputFormView.registerTextFieldDelegate(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example"
+}
