@@ -1,0 +1,16 @@
+PODS:
+  - NKInputFormKit (0.1.0)
+
+DEPENDENCIES:
+  - NKInputFormKit (from `../`)
+
+EXTERNAL SOURCES:
+  NKInputFormKit:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  NKInputFormKit: feb0c83b83e15587549d8ec7a27a416576f9eb8e
+
+PODFILE CHECKSUM: ab4bf801edf76fb0adddd200fd354edaf21e5429
+
+COCOAPODS: 1.2.1
