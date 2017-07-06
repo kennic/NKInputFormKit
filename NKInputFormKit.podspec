@@ -26,7 +26,7 @@ A base class helps you create various of form views easily like: Login dialog, S
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Nam Kennic' => 'namkennic@me.com' }
   s.source           = { :git => 'https://github.com/kennic/NKInputFormKit.git', :tag => s.version.to_s }
-  s.social_media_url = 'https://twitter.com/namkennic>'
+  s.social_media_url = 'https://twitter.com/namkennic'
 
   s.ios.deployment_target = '9.0'
 
