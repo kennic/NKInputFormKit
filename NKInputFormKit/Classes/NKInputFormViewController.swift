@@ -9,7 +9,7 @@
 import UIKit
 
 open class NKInputFormViewController: UIViewController, UINavigationControllerDelegate, UITextFieldDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate {
-	public var inputFormView						: InputFormView!
+	public var inputFormView						: NKInputFormView!
 	public var animationWhenPoppingBack				: UIViewAnimationOptions! = .transitionFlipFromRight
 	public var animationDuration					: TimeInterval = 0.4
 	public var spaceBetweenLowestViewAndKeyboard	: CGFloat = 10.0
@@ -33,7 +33,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 	
 	// MARK: -
 	
-	public convenience init(inputFormViewInstance InputFormViewInstance: InputFormView!) {
+	public convenience init(inputFormViewInstance NKInputFormViewInstance: NKInputFormView!) {
 		self.init(nibName: nil, bundle: nil)
 		
 		self.automaticallyAdjustsScrollViewInsets = false
@@ -45,7 +45,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		tapGesture.cancelsTouchesInView = false
 		tapGesture.delegate = self
 		
-		inputFormView = InputFormViewInstance
+		inputFormView = NKInputFormViewInstance
 		inputFormView.delegate = self
 		inputFormView.addGestureRecognizer(tapGesture)
 		inputFormView.onSizeChangeRequested = #selector(onSizeChangeRequested)
@@ -151,7 +151,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 	// MARK: - Events
 	
 	open func onButtonSelected(_ sender: UIButton) {
-		let buttonTag : InputFormButtonTag = InputFormButtonTag(rawValue:sender.tag)!
+		let buttonTag : NKInputFormButtonTag = NKInputFormButtonTag(rawValue:sender.tag)!
 		
 		if buttonTag == .cancel {
 			self.cancelAction()
@@ -162,7 +162,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		
 	}
 	
-	open func onSizeChangeRequested(_ sender: InputFormView) {
+	open func onSizeChangeRequested(_ sender: NKInputFormView) {
 		self.validateViewSize()
 	}
 	
@@ -342,14 +342,14 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 }
 
 
-// MARK: - InputFormView
+// MARK: - NKInputFormView
 
-public enum InputFormButtonTag : Int {
+public enum NKInputFormButtonTag : Int {
 	case cancel = 100
 	case submit = 101
 }
 
-open class InputFormView: UIScrollView {
+open class NKInputFormView: UIScrollView {
 	var lastButton				: UIView? = nil
 	var backgroundView			: UIVisualEffectView? = nil
 	var onSizeChangeRequested	: Selector?
