@@ -39,7 +39,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		self.automaticallyAdjustsScrollViewInsets = false
 		self.modalTransitionStyle	= .coverVertical
 		self.modalPresentationStyle = .overCurrentContext
-		self.view.backgroundColor	= UIColor.clear
+		self.view.backgroundColor	= .clear
 		
 		tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
 		tapGesture.cancelsTouchesInView = false
@@ -419,7 +419,7 @@ open class InputFormView: UIScrollView {
 	public init() {
 		super.init(frame: CGRect.zero)
 		
-		self.backgroundColor		= UIColor.white
+		self.backgroundColor		= .white
 		self.alwaysBounceVertical	= false
 		self.alwaysBounceHorizontal = false
 		self.bounces				= true
