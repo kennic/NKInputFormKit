@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'NKInputFormKit_Example' do
+  pod 'NKInputFormKit', :path => '../'
+
+  target 'NKInputFormKit_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
