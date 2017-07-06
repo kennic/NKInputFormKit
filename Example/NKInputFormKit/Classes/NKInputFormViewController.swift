@@ -9,7 +9,7 @@
 import UIKit
 
 open class NKInputFormViewController: UIViewController, UINavigationControllerDelegate, UITextFieldDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate {
-	public var inputFormView						: NKInputFormView!
+	public var inputFormView						: InputFormView!
 	public var animationWhenPoppingBack				: UIViewAnimationOptions! = .transitionFlipFromRight
 	public var animationDuration					: TimeInterval = 0.4
 	public var spaceBetweenLowestViewAndKeyboard	: CGFloat = 10.0
@@ -33,7 +33,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 	
 	// MARK: -
 	
-	convenience init(inputFormViewInstance NKInputFormViewInstance: NKInputFormView!) {
+	public convenience init(inputFormViewInstance InputFormViewInstance: InputFormView!) {
 		self.init(nibName: nil, bundle: nil)
 		
 		self.automaticallyAdjustsScrollViewInsets = false
@@ -45,7 +45,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		tapGesture.cancelsTouchesInView = false
 		tapGesture.delegate = self
 		
-		inputFormView = NKInputFormViewInstance
+		inputFormView = InputFormViewInstance
 		inputFormView.delegate = self
 		inputFormView.addGestureRecognizer(tapGesture)
 		inputFormView.onSizeChangeRequested = #selector(onSizeChangeRequested)
@@ -69,7 +69,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 	open func cancelAction() {
 		dismiss(animated: true, completion: nil)
 	}
-
+	
 	open override func dismiss(animated flag: Bool, completion: (() -> Void)?) {
 		dismissKeyboard()
 		dismissViewControllerAnimated(flag, completion: completion, forceDismissing: false)
@@ -90,10 +90,10 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 			/*
 			let viewController: ModalViewController? = ModalViewManager.sharedInstance().modalViewControllerThatContains(self)
 			if viewController != nil {
-				viewController!.dismissWith(animated: flag, completion: completion)
+			viewController!.dismissWith(animated: flag, completion: completion)
 			}
 			else {
-				super.dismiss(animated: flag, completion: completion)
+			super.dismiss(animated: flag, completion: completion)
 			}
 			*/
 		}
@@ -103,7 +103,6 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		if self.navigationController != nil && self.navigationController!.viewControllers.count > 1 {
 			self.navigationController!.popToRootViewController(animated: flag)
 			self.validateViewSize()
-			
 			if completion != nil {
 				completion!()
 			}
@@ -151,8 +150,8 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 	
 	// MARK: - Events
 	
-	internal func onButtonSelected(_ sender: UIButton) {
-		let buttonTag : NKInputFormButtonTag = NKInputFormButtonTag(rawValue:sender.tag)!
+	open func onButtonSelected(_ sender: UIButton) {
+		let buttonTag : InputFormButtonTag = InputFormButtonTag(rawValue:sender.tag)!
 		
 		if buttonTag == .cancel {
 			self.cancelAction()
@@ -163,7 +162,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		
 	}
 	
-	internal func onSizeChangeRequested(_ sender: NKInputFormView) {
+	open func onSizeChangeRequested(_ sender: InputFormView) {
 		self.validateViewSize()
 	}
 	
@@ -203,23 +202,23 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 	}
 	
-	internal func keyboardWillShow(_ notification: Notification) {
+	open func keyboardWillShow(_ notification: Notification) {
 		if autoPushUpWhenShowingKeyboard {
 			var userInfo: [String: AnyObject] = (notification as NSNotification).userInfo! as! [String : AnyObject]
 			let endFrame: CGRect = userInfo[UIKeyboardFrameEndUserInfoKey]!.cgRectValue
 			let duration: TimeInterval = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
-	//		let curve: UIViewAnimationCurve = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! UIViewAnimationCurve
-
+			//		let curve: UIViewAnimationCurve = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! UIViewAnimationCurve
+			
 			keyboardFrame = self.view!.convert(endFrame, from: self.view.window)
 			let visibleKeyboardHeight: CGFloat = self.view.bounds.maxY - keyboardFrame.minY
 			setVisibleKeyboardHeight(visibleKeyboardHeight, animationDuration: duration)
 		}
 	}
 	
-	internal func keyboardWillHide(_ notification: Notification) {
+	open func keyboardWillHide(_ notification: Notification) {
 		var userInfo: [String: AnyObject] = (notification as NSNotification).userInfo! as! [String : AnyObject]
 		let duration: TimeInterval = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
-//		let curve: UIViewAnimationCurve = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! UIViewAnimationCurve
+		//		let curve: UIViewAnimationCurve = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! UIViewAnimationCurve
 		keyboardFrame = CGRect.zero
 		setVisibleKeyboardHeight(0.0, animationDuration: duration)
 	}
@@ -343,18 +342,18 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 }
 
 
-// MARK: - NKInputFormView
+// MARK: - InputFormView
 
-public enum NKInputFormButtonTag : Int {
+public enum InputFormButtonTag : Int {
 	case cancel = 100
 	case submit = 101
 }
 
-open class NKInputFormView: UIScrollView {
+open class InputFormView: UIScrollView {
 	var lastButton				: UIView? = nil
 	var backgroundView			: UIVisualEffectView? = nil
 	var onSizeChangeRequested	: Selector?
-	var keyboardFrame			: CGRect! = .zero
+	var keyboardFrame			: CGRect! = CGRect.zero
 	
 	internal var buttonArray	: [UIButton]!		= []
 	internal var textFieldArray	: [UITextField]!	= []

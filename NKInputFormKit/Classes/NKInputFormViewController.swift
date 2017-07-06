@@ -33,7 +33,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 	
 	// MARK: -
 	
-	convenience init(inputFormViewInstance InputFormViewInstance: InputFormView!) {
+	public convenience init(inputFormViewInstance InputFormViewInstance: InputFormView!) {
 		self.init(nibName: nil, bundle: nil)
 		
 		self.automaticallyAdjustsScrollViewInsets = false
@@ -150,7 +150,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 	
 	// MARK: - Events
 	
-	internal func onButtonSelected(_ sender: UIButton) {
+	open func onButtonSelected(_ sender: UIButton) {
 		let buttonTag : InputFormButtonTag = InputFormButtonTag(rawValue:sender.tag)!
 		
 		if buttonTag == .cancel {
@@ -162,7 +162,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		
 	}
 	
-	internal func onSizeChangeRequested(_ sender: InputFormView) {
+	open func onSizeChangeRequested(_ sender: InputFormView) {
 		self.validateViewSize()
 	}
 	
@@ -202,7 +202,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 	}
 	
-	internal func keyboardWillShow(_ notification: Notification) {
+	open func keyboardWillShow(_ notification: Notification) {
 		if autoPushUpWhenShowingKeyboard {
 			var userInfo: [String: AnyObject] = (notification as NSNotification).userInfo! as! [String : AnyObject]
 			let endFrame: CGRect = userInfo[UIKeyboardFrameEndUserInfoKey]!.cgRectValue
@@ -215,7 +215,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		}
 	}
 	
-	internal func keyboardWillHide(_ notification: Notification) {
+	open func keyboardWillHide(_ notification: Notification) {
 		var userInfo: [String: AnyObject] = (notification as NSNotification).userInfo! as! [String : AnyObject]
 		let duration: TimeInterval = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
 //		let curve: UIViewAnimationCurve = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! UIViewAnimationCurve
