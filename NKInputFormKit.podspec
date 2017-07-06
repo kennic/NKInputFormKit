@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'NKInputFormKit'
   s.version          = '1.0.0'
-  s.summary          = 'A base class helps you create various of form views easily'
+  s.summary          = 'A base class help you to create variations of form views easily'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-A base class helps you create various of form views easily like: Login dialog, SignUp dialog, Password dialog.
+A base class help you to create variations of form views easily like: Login dialog, SignUp dialog, Password dialog.
                        DESC
 
   s.homepage         = 'https://github.com/kennic/NKInputFormKit'
