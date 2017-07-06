@@ -289,6 +289,27 @@
     },
     {
       "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 353,
+      "symbol": "NKInputFormView.backgroundView",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 354,
+      "symbol": "NKInputFormView.onSizeChangeRequested",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
+      "line": 355,
+      "symbol": "NKInputFormView.keyboardFrame",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/namkennic/Documents/Xcode Projects/NKInputFormKit/Example/NKInputFormKit/Classes/NKInputFormViewController.swift",
       "line": 365,
       "symbol": "NKInputFormView.allTextFields",
       "symbol_kind": "source.lang.swift.decl.var.instance",

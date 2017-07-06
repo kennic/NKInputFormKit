@@ -350,14 +350,14 @@ public enum NKInputFormButtonTag : Int {
 }
 
 open class NKInputFormView: UIScrollView {
-	var lastButton				: UIView? = nil
-	var backgroundView			: UIVisualEffectView? = nil
-	var onSizeChangeRequested	: Selector?
-	var keyboardFrame			: CGRect! = CGRect.zero
+	public var backgroundView			: UIVisualEffectView? = nil
+	public var onSizeChangeRequested	: Selector?
+	public var keyboardFrame			: CGRect! = CGRect.zero
 	
 	internal var buttonArray	: [UIButton]!		= []
 	internal var textFieldArray	: [UITextField]!	= []
 	internal var controlArray	: [UIControl]!		= []
+	internal var lastButton		: UIView? = nil
 	
 	internal var _enabled		: Bool = true // enable/disable all controls, including TextFields and Buttons
 	internal var _editable		: Bool = true // enable/disable all TextFields, not effected to Buttons
