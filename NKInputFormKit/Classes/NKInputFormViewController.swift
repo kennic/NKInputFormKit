@@ -34,7 +34,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 	// MARK: - Initialization
 	
 	public convenience init(inputFormViewInstance: NKInputFormView!) {
-		self.init()
+		self.init(nibName: nil, bundle: nil)
 		
 		self.automaticallyAdjustsScrollViewInsets = false
 		self.modalTransitionStyle	= .coverVertical

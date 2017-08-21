@@ -12,7 +12,7 @@ import NKInputFormKit
 class LoginViewController: NKInputFormViewController {
 	var formView : LoginFormView!
 	
-	convenience override init () {
+	convenience init () {
 		self.init(inputFormViewInstance: LoginFormView())
 		formView = inputFormView as! LoginFormView
 	}
