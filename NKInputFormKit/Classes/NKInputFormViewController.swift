@@ -31,10 +31,17 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 	}
 	
 	
-	// MARK: -
+	// MARK: - Initialization
 	
-	public convenience init(inputFormViewInstance NKInputFormViewInstance: NKInputFormView!) {
-		self.init(nibName: nil, bundle: nil)
+	public convenience init(inputFormViewInstance: NKInputFormView!) {
+		self.init()
+		
+		inputFormView = inputFormViewInstance
+		self.addSubFormView(inputFormView)
+	}
+	
+	init() {
+		super.init(nibName: nil, bundle: nil)
 		
 		self.automaticallyAdjustsScrollViewInsets = false
 		self.modalTransitionStyle	= .coverVertical
@@ -44,18 +51,23 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
 		tapGesture.cancelsTouchesInView = false
 		tapGesture.delegate = self
-		
-		inputFormView = NKInputFormViewInstance
-		inputFormView.delegate = self
-		inputFormView.addGestureRecognizer(tapGesture)
-		inputFormView.onSizeChangeRequested = #selector(onSizeChangeRequested)
-		inputFormView.registerTextFieldDelegate(self)
-		inputFormView.registerTouchEventForAllButtonsWithTarget(self, selector: #selector(onButtonSelected))
-		self.view.addSubview(inputFormView)
+	}
+	
+	required public init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
 	}
 	
 	
 	// MARK: - Public Methods
+	
+	open func addSubFormView(_ formView: NKInputFormView) {
+		formView.delegate = self
+		formView.addGestureRecognizer(tapGesture)
+		formView.onSizeChangeRequested = #selector(onSizeChangeRequested)
+		formView.registerTextFieldDelegate(self)
+		formView.registerTouchEventForAllButtonsWithTarget(self, selector: #selector(onButtonSelected))
+		self.view.addSubview(formView)
+	}
 	
 	open func submitAction() {
 		if loading {
@@ -79,10 +91,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		if (self.navigationController != nil) && (self.navigationController!.viewControllers.count > 1) && !forceDimissing {
 			self.navigationController!.popViewController(animated: flag)
 			validateViewSize()
-			
-			if completion != nil {
-				completion!()
-			}
+			completion?()
 		}
 		else {
 			super.dismiss(animated: flag, completion: completion)
@@ -103,9 +112,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		if self.navigationController != nil && self.navigationController!.viewControllers.count > 1 {
 			self.navigationController!.popToRootViewController(animated: flag)
 			self.validateViewSize()
-			if completion != nil {
-				completion!()
-			}
+			completion?()
 		}
 	}
 	
