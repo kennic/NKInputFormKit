@@ -9,7 +9,7 @@
 import UIKit
 
 open class NKInputFormViewController: UIViewController, UINavigationControllerDelegate, UITextFieldDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate {
-	public var inputFormView						: NKInputFormView!
+	public var inputFormView						: NKInputFormView? = nil
 	public var animationWhenPoppingBack				: UIViewAnimationOptions! = .transitionFlipFromRight
 	public var animationDuration					: TimeInterval = 0.4
 	public var spaceBetweenLowestViewAndKeyboard	: CGFloat = 10.0
@@ -26,7 +26,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		}
 		set (value) {
 			_isLoading = value
-			inputFormView.enabled = !value
+			inputFormView?.enabled = !value
 		}
 	}
 	
@@ -35,9 +35,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 	
 	public convenience init(inputFormViewInstance: NKInputFormView!) {
 		self.init()
-		
-		inputFormView = inputFormViewInstance
-		self.addSubFormView(inputFormView)
+		self.setActiveFormView(inputFormViewInstance!)
 	}
 	
 	init() {
@@ -60,16 +58,21 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 	
 	// MARK: - Public Methods
 	
-	open func addSubFormView(_ formView: NKInputFormView) {
-		formView.delegate = self
-		formView.addGestureRecognizer(tapGesture)
-		formView.onSizeChangeRequested = #selector(onSizeChangeRequested)
-		formView.registerTextFieldDelegate(self)
-		formView.registerTouchEventForAllButtonsWithTarget(self, selector: #selector(onButtonSelected))
-		self.view.addSubview(formView)
+	open func setActiveFormView(_ formView: NKInputFormView) {
+		if inputFormView != nil {
+			removeFormView(inputFormView!)
+		}
+		
+		inputFormView = formView
+		inputFormView!.delegate = self
+		inputFormView!.addGestureRecognizer(tapGesture)
+		inputFormView!.onSizeChangeRequested = #selector(onSizeChangeRequested)
+		inputFormView!.registerTextFieldDelegate(self)
+		inputFormView!.registerTouchEventForAllButtonsWithTarget(self, selector: #selector(onButtonSelected))
+		self.view.addSubview(inputFormView!)
 	}
 	
-	open func removeSubFormView(_ formView: NKInputFormView) {
+	fileprivate func removeFormView(_ formView: NKInputFormView) {
 		if formView.superview == self.view {
 			formView.delegate = nil
 			formView.removeGestureRecognizer(tapGesture)
@@ -147,14 +150,19 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 	
 	override open func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
-		inputFormView.frame = self.view.bounds;
+		inputFormView?.frame = self.view.bounds;
 	}
 	
 	override open var preferredContentSize: CGSize {
 		get {
-			var screenSize: CGSize = UIScreen.main.bounds.size
-			screenSize.height = CGFloat(NSIntegerMax)
-			return inputFormView.sizeThatFits(screenSize)
+			if let inputFormView = inputFormView {
+				var screenSize: CGSize = UIScreen.main.bounds.size
+				screenSize.height = CGFloat(NSIntegerMax)
+				return inputFormView.sizeThatFits(screenSize)
+			}
+			else {
+				return .zero
+			}
 		}
 		set (value) {
 			super.preferredContentSize = value
@@ -198,7 +206,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 	}
 	
 	open func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-		let nextResponder: UIResponder? = inputFormView.nextResponderFromResponder(textField)
+		let nextResponder: UIResponder? = inputFormView?.nextResponderFromResponder(textField)
 		if nextResponder != nil {
 			nextResponder!.becomeFirstResponder()
 			return true
@@ -266,11 +274,11 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 			var offsetForScrollingTextFieldToTop: CGFloat = (self.currentFirstResponder != nil ? self.currentFirstResponder!.frame.minY : 0.0)
 			offsetForScrollingTextFieldToTop -= spaceBetweenLowestViewAndKeyboard
 			
-			let lowestView: UIView? = inputFormView.lowestView()
+			let lowestView: UIView? = inputFormView?.lowestView()
 			var offsetForScrollingLowestViewToBottom: CGFloat = 0.0
 			offsetForScrollingLowestViewToBottom += visibleKeyboardHeight
-			offsetForScrollingLowestViewToBottom += lowestView != nil ? lowestView!.frame.maxY : 0
-			offsetForScrollingLowestViewToBottom -= inputFormView.bounds.height
+			offsetForScrollingLowestViewToBottom += lowestView?.frame.maxY ?? 0
+			offsetForScrollingLowestViewToBottom -= inputFormView?.bounds.height ?? 0
 			offsetForScrollingLowestViewToBottom += spaceBetweenLowestViewAndKeyboard
 			
 			let value: CGFloat = offsetForScrollingTextFieldToTop > 0 ? min(offsetForScrollingTextFieldToTop, offsetForScrollingLowestViewToBottom) : max(offsetForScrollingLowestViewToBottom, 0)
@@ -280,7 +288,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 			contentOffset = CGPoint(x: 0.0, y: value)
 		}
 		
-		inputFormView.setContentOffset(contentOffset, animated: animated)
+		inputFormView?.setContentOffset(contentOffset, animated: animated)
 	}
 	
 	public var visibleKeyboardHeight : CGFloat {
@@ -299,15 +307,17 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		get {
 			var result: UIView? = nil
 			
-			for textField: UITextField in inputFormView.allTextFields {
-				if textField.isFirstResponder {
-					result = textField
+			if inputFormView != nil {
+				for textField: UITextField in inputFormView!.allTextFields {
+					if textField.isFirstResponder {
+						result = textField
+					}
 				}
-			}
-			
-			for control: UIControl in inputFormView.allControls {
-				if control.isFirstResponder {
-					result = control
+				
+				for control: UIControl in inputFormView!.allControls {
+					if control.isFirstResponder {
+						result = control
+					}
 				}
 			}
 			
@@ -353,8 +363,8 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 	deinit {
 		NotificationCenter.default.removeObserver(self)
 		
-		inputFormView.registerTextFieldDelegate(nil)
-		inputFormView.unregisterTouchEventForAllButtonsWithTarget(self, selector: #selector(onButtonSelected))
+		inputFormView?.registerTextFieldDelegate(nil)
+		inputFormView?.unregisterTouchEventForAllButtonsWithTarget(self, selector: #selector(onButtonSelected))
 	}
 }
 
