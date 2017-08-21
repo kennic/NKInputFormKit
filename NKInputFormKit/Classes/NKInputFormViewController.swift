@@ -69,6 +69,16 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		self.view.addSubview(formView)
 	}
 	
+	open func removeSubFormView(_ formView: NKInputFormView) {
+		if formView.superview == self.view {
+			formView.delegate = nil
+			formView.removeGestureRecognizer(tapGesture)
+			formView.onSizeChangeRequested = nil
+			formView.registerTextFieldDelegate(nil)
+			formView.unregisterTouchEventForAllButtonsWithTarget(self, selector: #selector(onButtonSelected))
+		}
+	}
+	
 	open func submitAction() {
 		if loading {
 			return
