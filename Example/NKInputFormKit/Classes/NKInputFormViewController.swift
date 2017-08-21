@@ -35,11 +35,6 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 	
 	public convenience init(inputFormViewInstance: NKInputFormView!) {
 		self.init()
-		self.setActiveFormView(inputFormViewInstance!)
-	}
-	
-	public init() {
-		super.init(nibName: nil, bundle: nil)
 		
 		self.automaticallyAdjustsScrollViewInsets = false
 		self.modalTransitionStyle	= .coverVertical
@@ -49,10 +44,8 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
 		tapGesture.cancelsTouchesInView = false
 		tapGesture.delegate = self
-	}
-	
-	required public init?(coder aDecoder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
+		
+		self.setActiveFormView(inputFormViewInstance!)
 	}
 	
 	
