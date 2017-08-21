@@ -38,7 +38,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		self.setActiveFormView(inputFormViewInstance!)
 	}
 	
-	init() {
+	public init() {
 		super.init(nibName: nil, bundle: nil)
 		
 		self.automaticallyAdjustsScrollViewInsets = false
@@ -377,7 +377,7 @@ public enum NKInputFormButtonTag : Int {
 }
 
 open class NKInputFormView: UIScrollView {
-	public var backgroundView			: UIVisualEffectView? = nil
+	public var backgroundView			: UIView? = nil
 	public var onSizeChangeRequested	: Selector?
 	public var keyboardFrame			: CGRect! = CGRect.zero
 	
