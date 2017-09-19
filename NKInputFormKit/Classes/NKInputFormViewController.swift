@@ -62,6 +62,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		inputFormView!.onSizeChangeRequested = #selector(onSizeChangeRequested)
 		inputFormView!.registerTextFieldDelegate(self)
 		inputFormView!.registerTouchEventForAllButtonsWithTarget(self, selector: #selector(onButtonSelected))
+		inputFormView!.registerValueChangedEventForAllControlsWithTarget(self, selector: #selector(onControlValueChanged))
 		self.view.addSubview(inputFormView!)
 	}
 	
@@ -72,6 +73,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 			formView.onSizeChangeRequested = nil
 			formView.registerTextFieldDelegate(nil)
 			formView.unregisterTouchEventForAllButtonsWithTarget(self, selector: #selector(onButtonSelected))
+			formView.unregisterValueChangedEventForAllControlsWithTarget(self, selector: #selector(onControlValueChanged))
 		}
 	}
 	
@@ -169,14 +171,17 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 	// MARK: - Events
 	
 	@objc open func onButtonSelected(_ sender: UIButton) {
-		let buttonTag : NKInputFormButtonTag = NKInputFormButtonTag(rawValue:sender.tag)!
-		
-		if buttonTag == .cancel {
-			self.cancelAction()
+		if let buttonTag = NKInputFormButtonTag(rawValue:sender.tag) {
+			if buttonTag == .cancel {
+				self.cancelAction()
+			}
+			else if buttonTag == .submit {
+				self.submitAction()
+			}
 		}
-		else if buttonTag == .submit {
-			self.submitAction()
-		}
+	}
+	
+	@objc open func onControlValueChanged(_ sender: UIControl) {
 		
 	}
 	
@@ -358,6 +363,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		
 		inputFormView?.registerTextFieldDelegate(nil)
 		inputFormView?.unregisterTouchEventForAllButtonsWithTarget(self, selector: #selector(onButtonSelected))
+		inputFormView?.unregisterValueChangedEventForAllControlsWithTarget(self, selector: #selector(onControlValueChanged))
 	}
 }
 
@@ -492,6 +498,18 @@ open class NKInputFormView: UIScrollView {
 	open func unregisterTouchEventForAllButtonsWithTarget(_ target: AnyObject, selector: Selector) {
 		for button: UIButton in buttonArray {
 			button.removeTarget(target, action: selector, for: .touchUpInside)
+		}
+	}
+	
+	open func registerValueChangedEventForAllControlsWithTarget(_ target: AnyObject, selector: Selector) {
+		for control: UIControl in controlArray {
+			control.addTarget(target, action: selector, for: .valueChanged)
+		}
+	}
+	
+	open func unregisterValueChangedEventForAllControlsWithTarget(_ target: AnyObject, selector: Selector) {
+		for control: UIControl in controlArray {
+			control.removeTarget(target, action: selector, for: .valueChanged)
 		}
 	}
 	
