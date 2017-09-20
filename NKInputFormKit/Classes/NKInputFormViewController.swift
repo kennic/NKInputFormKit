@@ -266,7 +266,6 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 	
 	internal func updateInputFormViewContentOffsetAnimated(_ animated: Bool) {
 		var contentOffset: CGPoint = CGPoint.zero
-		self.viewDidLayoutSubviews()
 		
 		if visibleKeyboardHeight > 0.0 {
 			var offsetForScrollingTextFieldToTop: CGFloat = (self.currentFirstResponder != nil ? self.currentFirstResponder!.frame.minY : 0.0)
