@@ -17,16 +17,10 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 	public var autoPushUpWhenShowingKeyboard		: Bool = true
 	
 	internal var tapGesture							: UITapGestureRecognizer!
-	internal var _visibleKeyboardHeight				: CGFloat = 0
-	internal var _isLoading							: Bool = false
 	
-	public var loading : Bool {
-		get {
-			return _isLoading
-		}
-		set (value) {
-			_isLoading = value
-			inputFormView?.enabled = !value
+	public var loading : Bool = false {
+		didSet {
+			inputFormView?.enabled = !loading
 		}
 	}
 	
@@ -62,6 +56,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		inputFormView!.onSizeChangeRequested = #selector(onSizeChangeRequested)
 		inputFormView!.registerTextFieldDelegate(self)
 		inputFormView!.registerTouchEventForAllButtonsWithTarget(self, selector: #selector(onButtonSelected))
+		inputFormView!.registerValueChangedEventForAllControlsWithTarget(self, selector: #selector(onControlValueChanged))
 		self.view.addSubview(inputFormView!)
 	}
 	
@@ -72,6 +67,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 			formView.onSizeChangeRequested = nil
 			formView.registerTextFieldDelegate(nil)
 			formView.unregisterTouchEventForAllButtonsWithTarget(self, selector: #selector(onButtonSelected))
+			formView.unregisterValueChangedEventForAllControlsWithTarget(self, selector: #selector(onControlValueChanged))
 		}
 	}
 	
@@ -195,7 +191,9 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 	}
 	
 	open func textFieldDidBeginEditing(_ textField: UITextField) {
-		updateInputFormViewContentOffsetAnimated(true)
+		if visibleKeyboardHeight > 0 {
+			updateInputFormViewContentOffsetAnimated(true)
+		}
 	}
 	
 	open func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -241,9 +239,9 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		setVisibleKeyboardHeight(0.0, animationDuration: duration)
 	}
 	
-	internal func setVisibleKeyboardHeight(_ visibleKeyboardHeight: CGFloat, animationDuration: TimeInterval) {
+	internal func setVisibleKeyboardHeight(_ value: CGFloat, animationDuration: TimeInterval) {
 		let animationsBlock: ()->() = {() -> Void in
-			self.visibleKeyboardHeight = visibleKeyboardHeight
+			self.visibleKeyboardHeight = value
 		}
 		
 		if animationDuration == 0.0 {
@@ -284,13 +282,9 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		inputFormView?.setContentOffset(contentOffset, animated: animated)
 	}
 	
-	public var visibleKeyboardHeight : CGFloat {
-		get {
-			return _visibleKeyboardHeight
-		}
-		set (value) {
-			if _visibleKeyboardHeight != value {
-				_visibleKeyboardHeight = value
+	public var visibleKeyboardHeight : CGFloat = 0 {
+		didSet {
+			if visibleKeyboardHeight != oldValue {
 				updateInputFormViewContentOffsetAnimated(false)
 			}
 		}
@@ -358,6 +352,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		
 		inputFormView?.registerTextFieldDelegate(nil)
 		inputFormView?.unregisterTouchEventForAllButtonsWithTarget(self, selector: #selector(onButtonSelected))
+		inputFormView?.unregisterValueChangedEventForAllControlsWithTarget(self, selector: #selector(onControlValueChanged))
 	}
 }
 
@@ -489,9 +484,21 @@ open class NKInputFormView: UIScrollView {
 		}
 	}
 	
+	open func registerValueChangedEventForAllControlsWithTarget(_ target: AnyObject, selector: Selector) {
+		for control: UIControl in controlArray {
+			control.addTarget(target, action: selector, for: .valueChanged)
+		}
+	}
+	
 	open func unregisterTouchEventForAllButtonsWithTarget(_ target: AnyObject, selector: Selector) {
 		for button: UIButton in buttonArray {
 			button.removeTarget(target, action: selector, for: .touchUpInside)
+		}
+	}
+	
+	open func unregisterValueChangedEventForAllControlsWithTarget(_ target: AnyObject, selector: Selector) {
+		for control: UIControl in controlArray {
+			control.removeTarget(target, action: selector, for: .valueChanged)
 		}
 	}
 	

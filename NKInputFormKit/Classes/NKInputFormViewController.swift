@@ -17,16 +17,10 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 	public var autoPushUpWhenShowingKeyboard		: Bool = true
 	
 	internal var tapGesture							: UITapGestureRecognizer!
-	internal var _visibleKeyboardHeight				: CGFloat = 0
-	internal var _isLoading							: Bool = false
 	
-	public var loading : Bool {
-		get {
-			return _isLoading
-		}
-		set (value) {
-			_isLoading = value
-			inputFormView?.enabled = !value
+	public var loading : Bool = false {
+		didSet {
+			inputFormView?.enabled = !loading
 		}
 	}
 	
@@ -200,7 +194,9 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 	}
 	
 	open func textFieldDidBeginEditing(_ textField: UITextField) {
-		updateInputFormViewContentOffsetAnimated(true)
+		if visibleKeyboardHeight > 0 {
+			updateInputFormViewContentOffsetAnimated(true)
+		}
 	}
 	
 	open func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -246,9 +242,9 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		setVisibleKeyboardHeight(0.0, animationDuration: duration)
 	}
 	
-	internal func setVisibleKeyboardHeight(_ visibleKeyboardHeight: CGFloat, animationDuration: TimeInterval) {
+	internal func setVisibleKeyboardHeight(_ value: CGFloat, animationDuration: TimeInterval) {
 		let animationsBlock: ()->() = {() -> Void in
-			self.visibleKeyboardHeight = visibleKeyboardHeight
+			self.visibleKeyboardHeight = value
 		}
 		
 		if animationDuration == 0.0 {
@@ -288,13 +284,9 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		inputFormView?.setContentOffset(contentOffset, animated: animated)
 	}
 	
-	public var visibleKeyboardHeight : CGFloat {
-		get {
-			return _visibleKeyboardHeight
-		}
-		set (value) {
-			if _visibleKeyboardHeight != value {
-				_visibleKeyboardHeight = value
+	public var visibleKeyboardHeight : CGFloat = 0 {
+		didSet {
+			if visibleKeyboardHeight != oldValue {
 				updateInputFormViewContentOffsetAnimated(false)
 			}
 		}
