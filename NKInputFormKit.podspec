@@ -29,7 +29,7 @@ A base class help you to create variations of form views easily like: Login dial
   s.social_media_url = 'https://twitter.com/namkennic'
 
   s.ios.deployment_target = '9.0'
-
+  s.swift_version = '4.0'
   s.source_files = 'NKInputFormKit/Classes/**/*'
   
   # s.resource_bundles = {
