@@ -13,14 +13,14 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 	public var animationWhenPoppingBack				: UIViewAnimationOptions! = .transitionFlipFromRight
 	public var animationDuration					: TimeInterval = 0.4
 	public var spaceBetweenLowestViewAndKeyboard	: CGFloat = 10.0
-	public var keyboardFrame						: CGRect! = CGRect.zero
+	public var keyboardFrame						: CGRect! = .zero
 	public var autoPushUpWhenShowingKeyboard		: Bool = true
 	
 	internal var tapGesture							: UITapGestureRecognizer!
 	
-	public var loading : Bool = false {
+	open var isLoading : Bool = false {
 		didSet {
-			inputFormView?.enabled = !loading
+			inputFormView?.enabled = !isLoading
 		}
 	}
 	
@@ -72,7 +72,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 	}
 	
 	open func submitAction() {
-		if loading {
+		if isLoading {
 			return
 		}
 		

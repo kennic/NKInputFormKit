@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'NKInputFormKit'
-  s.version          = '1.7'
+  s.version          = '1.8'
   s.summary          = 'A base class help you to create variations of form views easily'
 
 # This description is used to generate tags and improve search results.
