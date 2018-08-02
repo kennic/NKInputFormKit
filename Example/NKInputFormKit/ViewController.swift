@@ -24,7 +24,7 @@ class ViewController: UIViewController {
 		presentButton.setBorderColor(.black, for: .normal)
 		presentButton.setBackgroundColor(.black, for: .highlighted)
 		presentButton.borderSize = 1.0
-		presentButton.extendSize = CGSize(width: 20, height: 10)
+		presentButton.extendSize = CGSize(width: 20, height: 20)
 		presentButton.addTarget(self, action: #selector(presentLogin), for: .touchUpInside)
 		
 		self.view.addSubview(presentButton)

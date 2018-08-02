@@ -40,7 +40,7 @@ class LoginViewController: NKInputFormViewController {
 		self.isLoading = true
 		formView.submitButton.isLoading = true
 		
-		DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+		DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
 			self.dismiss(animated: true, completion: nil)
 		}
 	}
@@ -77,18 +77,22 @@ internal class LoginFormView : NKInputFormView {
 		titleLabel.textAlignment = .center
 		titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
 		
-		usernameField.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
-		passwordField.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
-		
 		usernameField.placeholder = "Username"
+		usernameField.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
+		usernameField.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+		
 		passwordField.placeholder = "Password"
+		passwordField.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
+		passwordField.font = UIFont.systemFont(ofSize: 14, weight: .regular)
 		
 		cancelButton.title = "Cancel"
 		cancelButton.isRoundedButton = true
 		cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .medium)
 		cancelButton.setTitleColor(.black, for: .normal)
 		cancelButton.setTitleColor(.white, for: .highlighted)
+		cancelButton.setTitleColor(.gray, for: .disabled)
 		cancelButton.setBorderColor(.black, for: .normal)
+		cancelButton.setBorderColor(.gray, for: .disabled)
 		cancelButton.setBackgroundColor(.black, for: .highlighted)
 		cancelButton.borderSize = 1.0
 		cancelButton.tag = NKInputFormButtonTag.cancel.rawValue
