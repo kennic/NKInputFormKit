@@ -7,7 +7,7 @@
 
 ## Example
 
-Example coming soon
+Check [Example](https://github.com/kennic/NKInputFormKit/tree/master/Example) folder
 
 ## Requirements
 
