@@ -8,15 +8,51 @@
 
 import UIKit
 
-open class NKInputFormViewController: UIViewController, UINavigationControllerDelegate, UITextFieldDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate {
-	public var inputFormView						: NKInputFormView? = nil
+open class NKInputFormViewController: UIViewController, UIScrollViewDelegate {
+	
+	public var inputFormView : NKInputFormView? = nil {
+		willSet {
+			if newValue != inputFormView {
+				if let oldValue = inputFormView, oldValue.superview == self.view {
+					oldValue.delegate = nil
+					oldValue.removeGestureRecognizer(tapGesture)
+					oldValue.onSizeChangeRequested = nil
+					oldValue.registerTextFieldDelegate(nil)
+					oldValue.unregisterTouchEventForAllButtonsWithTarget(self, selector: #selector(onButtonSelected))
+					oldValue.unregisterValueChangedEventForAllControlsWithTarget(self, selector: #selector(onControlValueChanged))
+				}
+			}
+		}
+		
+		didSet {
+			if let newValue = inputFormView {
+				newValue.delegate = self
+				newValue.addGestureRecognizer(tapGesture)
+				newValue.onSizeChangeRequested = #selector(onSizeChangeRequested)
+				newValue.registerTextFieldDelegate(self)
+				newValue.registerTouchEventForAllButtonsWithTarget(self, selector: #selector(onButtonSelected))
+				newValue.registerValueChangedEventForAllControlsWithTarget(self, selector: #selector(onControlValueChanged))
+				self.view.addSubview(newValue)
+			}
+		}
+	}
+	
+	public var tapToDismissKeyboard : Bool {
+		get {
+			return tapGesture.isEnabled
+		}
+		set (value) {
+			tapGesture.isEnabled = value
+		}
+	}
+	
 	public var animationWhenPoppingBack				: UIViewAnimationOptions! = .transitionFlipFromRight
 	public var animationDuration					: TimeInterval = 0.4
 	public var spaceBetweenLowestViewAndKeyboard	: CGFloat = 10.0
 	public var keyboardFrame						: CGRect! = .zero
 	public var autoPushUpWhenShowingKeyboard		: Bool = true
 	
-	internal var tapGesture							: UITapGestureRecognizer!
+	internal var tapGesture : UITapGestureRecognizer!
 	
 	open var isLoading : Bool = false {
 		didSet {
@@ -24,52 +60,7 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		}
 	}
 	
-	
-	// MARK: - Initialization
-	
-	public convenience init(inputFormViewInstance: NKInputFormView!) {
-		self.init(nibName: nil, bundle: nil)
-		
-		self.automaticallyAdjustsScrollViewInsets = false
-		self.modalTransitionStyle	= .coverVertical
-		self.modalPresentationStyle = .overCurrentContext
-		self.view.backgroundColor	= .clear
-		
-		tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-		tapGesture.cancelsTouchesInView = false
-		tapGesture.delegate = self
-		
-		self.setActiveFormView(inputFormViewInstance!)
-	}
-	
-	
 	// MARK: - Public Methods
-	
-	open func setActiveFormView(_ formView: NKInputFormView) {
-		if inputFormView != nil {
-			removeFormView(inputFormView!)
-		}
-		
-		inputFormView = formView
-		inputFormView!.delegate = self
-		inputFormView!.addGestureRecognizer(tapGesture)
-		inputFormView!.onSizeChangeRequested = #selector(onSizeChangeRequested)
-		inputFormView!.registerTextFieldDelegate(self)
-		inputFormView!.registerTouchEventForAllButtonsWithTarget(self, selector: #selector(onButtonSelected))
-		inputFormView!.registerValueChangedEventForAllControlsWithTarget(self, selector: #selector(onControlValueChanged))
-		self.view.addSubview(inputFormView!)
-	}
-	
-	fileprivate func removeFormView(_ formView: NKInputFormView) {
-		if formView.superview == self.view {
-			formView.delegate = nil
-			formView.removeGestureRecognizer(tapGesture)
-			formView.onSizeChangeRequested = nil
-			formView.registerTextFieldDelegate(nil)
-			formView.unregisterTouchEventForAllButtonsWithTarget(self, selector: #selector(onButtonSelected))
-			formView.unregisterValueChangedEventForAllControlsWithTarget(self, selector: #selector(onControlValueChanged))
-		}
-	}
 	
 	open func submitAction() {
 		if isLoading {
@@ -123,6 +114,19 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 	}
 	
 	// MARK: - UIViewController
+	
+	override open func viewDidLoad() {
+		super.viewDidLoad()
+		
+		self.automaticallyAdjustsScrollViewInsets = false
+		self.modalTransitionStyle	= .coverVertical
+		self.modalPresentationStyle = .overCurrentContext
+		self.view.backgroundColor	= .clear
+		
+		tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+		tapGesture.cancelsTouchesInView = false
+		tapGesture.delegate = self
+	}
 	
 	override open func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -181,33 +185,6 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 	
 	@objc open func onSizeChangeRequested(_ sender: NKInputFormView) {
 		self.validateViewSize()
-	}
-	
-	open func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-		return !(touch.view! is UIControl)
-	}
-	
-	// MARK: - UITextFieldDelegate
-	
-	open func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-		return true
-	}
-	
-	open func textFieldDidBeginEditing(_ textField: UITextField) {
-		if visibleKeyboardHeight > 0 {
-			updateInputFormViewContentOffsetAnimated(true)
-		}
-	}
-	
-	open func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-		let nextResponder: UIResponder? = inputFormView?.nextResponderFromResponder(textField)
-		if nextResponder != nil {
-			nextResponder!.becomeFirstResponder()
-			return true
-		}
-		
-		submitAction()
-		return true
 	}
 	
 	// MARK: - Keyboard Handling
@@ -328,24 +305,6 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 		return UIDevice.current.userInterfaceIdiom == .pad ? UIApplication.shared.statusBarOrientation : .portrait
 	}
 	
-	// MARK: - UINavigationControllerDelegate
-	
-	open func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-		validateViewSize()
-	}
-	
-	
-	// MARK: - Properties
-	
-	public var tapToDismissKeyboard : Bool {
-		get {
-			return tapGesture.isEnabled
-		}
-		set (value) {
-			tapGesture.isEnabled = value
-		}
-	}
-	
 	
 	// MARK: -
 	
@@ -358,6 +317,47 @@ open class NKInputFormViewController: UIViewController, UINavigationControllerDe
 	}
 }
 
+extension NKInputFormViewController: UIGestureRecognizerDelegate {
+	
+	open func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+		return !(touch.view! is UIControl)
+	}
+	
+}
+
+extension NKInputFormViewController: UITextFieldDelegate {
+	
+	open func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+		return true
+	}
+	
+	open func textFieldDidBeginEditing(_ textField: UITextField) {
+		if visibleKeyboardHeight > 0 {
+			updateInputFormViewContentOffsetAnimated(true)
+		}
+	}
+	
+	open func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		let nextResponder: UIResponder? = inputFormView?.nextResponderFromResponder(textField)
+		if nextResponder != nil {
+			nextResponder!.becomeFirstResponder()
+			return true
+		}
+		
+		submitAction()
+		return true
+	}
+	
+}
+
+extension NKInputFormViewController: UINavigationControllerDelegate {
+	
+	open func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+		validateViewSize()
+	}
+	
+}
+
 
 // MARK: - NKInputFormView
 
@@ -367,9 +367,22 @@ public enum NKInputFormButtonTag : Int {
 }
 
 open class NKInputFormView: UIScrollView {
-	public var backgroundView			: UIView? = nil
+	public var backgroundView : UIView? = nil {
+		willSet {
+			if let view = backgroundView, view.superview == self {
+				view.removeFromSuperview()
+			}
+		}
+		
+		didSet {
+			if let view = backgroundView {
+				self.insertSubview(view, at: 0)
+			}
+		}
+	}
+	
 	public var onSizeChangeRequested	: Selector?
-	public var keyboardFrame			: CGRect! = CGRect.zero
+	public var keyboardFrame			: CGRect = CGRect.zero
 	
 	internal var buttonArray	: [UIButton]!		= []
 	internal var textFieldArray	: [UITextField]!	= []
@@ -442,8 +455,7 @@ open class NKInputFormView: UIScrollView {
 		self.bounces				= true
 		self.delaysContentTouches	= false
 		
-		backgroundView = UIVisualEffectView.init(effect: UIBlurEffect(style: .light))
-		self.addSubview(backgroundView!)
+		self.backgroundView = UIVisualEffectView.init(effect: UIBlurEffect(style: .light))
 	}
 	
 	required public init?(coder aDecoder: NSCoder) {
@@ -510,3 +522,4 @@ open class NKInputFormView: UIScrollView {
 		}
 	}
 }
+

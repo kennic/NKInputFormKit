@@ -2,6 +2,7 @@ use_frameworks!
 
 target 'NKInputFormKit_Example' do
   pod 'NKInputFormKit', :path => '../'
+  pod 'NKModalViewManager'
 
   target 'NKInputFormKit_Tests' do
     inherit! :search_paths

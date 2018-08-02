@@ -1,16 +1,23 @@
 PODS:
-  - NKInputFormKit (1.0.0)
+  - NKInputFormKit (1.8)
+  - NKModalViewManager (3.3)
 
 DEPENDENCIES:
   - NKInputFormKit (from `../`)
+  - NKModalViewManager
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - NKModalViewManager
 
 EXTERNAL SOURCES:
   NKInputFormKit:
     :path: "../"
 
 SPEC CHECKSUMS:
-  NKInputFormKit: 374584854a799b32a3d273c6103fb8078c0d9580
+  NKInputFormKit: a6ab0f6fdbf7d396aca40c416684d4bd8ec6e12e
+  NKModalViewManager: f9f9539ac36417fa1ed446f4221e62e1748cbff9
 
-PODFILE CHECKSUM: ab4bf801edf76fb0adddd200fd354edaf21e5429
+PODFILE CHECKSUM: 9736078406494eb141fbfb42267989f9b1b42c10
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.5.3

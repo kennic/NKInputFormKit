@@ -7,18 +7,22 @@
 //
 
 import UIKit
+import NKModalViewManager
 
 class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+			self.presentLogin()
+		}
+	}
+	
+	func presentLogin() {
+		let viewController = LoginViewController()
+		NKModalViewManager.sharedInstance().presentModalViewController(viewController)
+	}
 
 }
 

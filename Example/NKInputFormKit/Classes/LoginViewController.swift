@@ -12,15 +12,13 @@ import NKInputFormKit
 class LoginViewController: NKInputFormViewController {
 	var formView : LoginFormView!
 	
-	convenience init () {
-		self.init(inputFormViewInstance: LoginFormView())
-		formView = inputFormView as! LoginFormView
-	}
-	
 	// MARK: -
 	
-	deinit {
-		NotificationCenter.default.removeObserver(self)
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		
+		formView = LoginFormView()
+		self.inputFormView = formView
 	}
 }
 
@@ -37,6 +35,10 @@ internal class LoginFormView : NKInputFormView {
 	
 	required internal init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
+	}
+	
+	override func sizeThatFits(_ size: CGSize) -> CGSize {
+		return CGSize(width: size.width * 0.8, height: 320)
 	}
 	
 }
