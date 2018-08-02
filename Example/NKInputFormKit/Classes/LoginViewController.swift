@@ -36,6 +36,15 @@ class LoginViewController: NKInputFormViewController {
 		}
 	}
 	
+	override func submitAction() {
+		self.isLoading = true
+		formView.submitButton.isLoading = true
+		
+		DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+			self.dismiss(animated: true, completion: nil)
+		}
+	}
+	
 	// MARK: -
 	
 	override func viewDidLoad() {
