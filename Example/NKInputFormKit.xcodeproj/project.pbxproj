@@ -299,13 +299,19 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-NKInputFormKit_Example/Pods-NKInputFormKit_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/FrameLayoutKit/FrameLayoutKit.framework",
+				"${BUILT_PRODUCTS_DIR}/NKButton/NKButton.framework",
 				"${BUILT_PRODUCTS_DIR}/NKInputFormKit/NKInputFormKit.framework",
 				"${BUILT_PRODUCTS_DIR}/NKModalViewManager/NKModalViewManager.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FrameLayoutKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NKButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NKInputFormKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NKModalViewManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

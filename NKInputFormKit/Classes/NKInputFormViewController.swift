@@ -33,6 +33,7 @@ open class NKInputFormViewController: UIViewController, UIScrollViewDelegate {
 				newValue.registerTouchEventForAllButtonsWithTarget(self, selector: #selector(onButtonSelected))
 				newValue.registerValueChangedEventForAllControlsWithTarget(self, selector: #selector(onControlValueChanged))
 				self.view.addSubview(newValue)
+				self.view.setNeedsLayout()
 			}
 		}
 	}
@@ -143,7 +144,7 @@ open class NKInputFormViewController: UIViewController, UIScrollViewDelegate {
 	
 	override open func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
-		inputFormView?.frame = self.view.bounds;
+		inputFormView?.frame = self.view.bounds
 	}
 	
 	override open var preferredContentSize: CGSize {
@@ -449,7 +450,7 @@ open class NKInputFormView: UIScrollView {
 	public init() {
 		super.init(frame: CGRect.zero)
 		
-		self.backgroundColor		= .white
+		self.backgroundColor		= .blue
 		self.alwaysBounceVertical	= false
 		self.alwaysBounceHorizontal = false
 		self.bounces				= true

@@ -1,23 +1,35 @@
 PODS:
-  - NKInputFormKit (1.8)
+  - FrameLayoutKit (3.0.15)
+  - NKButton (3.0):
+    - FrameLayoutKit
+    - NVActivityIndicatorView/AppExtension
+  - NKInputFormKit (2.0)
   - NKModalViewManager (3.3)
+  - NVActivityIndicatorView/AppExtension (4.3.0)
 
 DEPENDENCIES:
+  - NKButton
   - NKInputFormKit (from `../`)
   - NKModalViewManager
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - FrameLayoutKit
+    - NKButton
     - NKModalViewManager
+    - NVActivityIndicatorView
 
 EXTERNAL SOURCES:
   NKInputFormKit:
     :path: "../"
 
 SPEC CHECKSUMS:
-  NKInputFormKit: a6ab0f6fdbf7d396aca40c416684d4bd8ec6e12e
+  FrameLayoutKit: 4755f14aeb842be6c646659714b1f76d8b1786ad
+  NKButton: 65710d1e4e2c9ec756c23dec1b2834f0a97eb460
+  NKInputFormKit: 87557fc4a854562de71bcc4a7ecf09dc82b8b03c
   NKModalViewManager: f9f9539ac36417fa1ed446f4221e62e1748cbff9
+  NVActivityIndicatorView: 963f62bf9f993fcf23218e55958e5b1761b9504c
 
-PODFILE CHECKSUM: 9736078406494eb141fbfb42267989f9b1b42c10
+PODFILE CHECKSUM: 984b440426511f0afa20d6ff16bca7522f9647cf
 
 COCOAPODS: 1.5.3
