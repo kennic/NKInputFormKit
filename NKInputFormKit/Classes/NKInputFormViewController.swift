@@ -61,6 +61,11 @@ open class NKInputFormViewController: UIViewController, UIScrollViewDelegate {
 		}
 	}
 	
+	convenience public init(formView: NKInputFormView) {
+		self.init()
+		self.inputFormView = formView
+	}
+	
 	public init() {
 		super.init(nibName: nil, bundle: nil)
 		
