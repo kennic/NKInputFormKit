@@ -110,10 +110,10 @@ internal class LoginFormView : NKInputFormView {
 		let textFieldSize = CGSize(width: 0, height: 40)
 		let buttonSize = CGSize(width: 0, height: 40)
 		frameLayout.append(view: titleLabel)
-		frameLayout.appendEmptySpace(size: CGSize(width: 0, height: 10))
+		frameLayout.appendEmptySpace(size: 10)
 		frameLayout.append(view: usernameField).minSize = textFieldSize
 		frameLayout.append(view: passwordField).minSize = textFieldSize
-		frameLayout.appendEmptySpace(size: CGSize(width: 0, height: 10))
+		frameLayout.appendEmptySpace(size: 10)
 		frameLayout.append(view: cancelButton).minSize = buttonSize
 		frameLayout.append(view: submitButton).minSize = buttonSize
 		frameLayout.spacing = 5

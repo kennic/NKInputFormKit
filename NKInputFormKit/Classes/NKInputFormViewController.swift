@@ -217,39 +217,21 @@ open class NKInputFormViewController: UIViewController, UIScrollViewDelegate {
 		if autoPushUpWhenShowingKeyboard {
 			var userInfo: [String: AnyObject] = (notification as NSNotification).userInfo! as! [String : AnyObject]
 			let endFrame: CGRect = userInfo[UIKeyboardFrameEndUserInfoKey]!.cgRectValue
-			let duration: TimeInterval = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
+//			let duration: TimeInterval = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
 	//		let curve: UIViewAnimationCurve = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! UIViewAnimationCurve
 
 			keyboardFrame = self.view!.convert(endFrame, from: self.view.window)
 			let visibleKeyboardHeight: CGFloat = self.view.bounds.maxY - keyboardFrame.minY
-			setVisibleKeyboardHeight(visibleKeyboardHeight, animationDuration: duration)
+			self.visibleKeyboardHeight = visibleKeyboardHeight
 		}
 	}
 	
 	@objc open func keyboardWillHide(_ notification: Notification) {
-		var userInfo: [String: AnyObject] = (notification as NSNotification).userInfo! as! [String : AnyObject]
-		let duration: TimeInterval = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
+//		var userInfo: [String: AnyObject] = (notification as NSNotification).userInfo! as! [String : AnyObject]
+//		let duration: TimeInterval = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
 //		let curve: UIViewAnimationCurve = userInfo[UIKeyboardAnimationCurveUserInfoKey] as! UIViewAnimationCurve
 		keyboardFrame = CGRect.zero
-		setVisibleKeyboardHeight(0.0, animationDuration: duration)
-	}
-	
-	internal func setVisibleKeyboardHeight(_ value: CGFloat, animationDuration: TimeInterval) {
-		let animationsBlock: ()->() = {() -> Void in
-			self.visibleKeyboardHeight = value
-		}
-		
-		if animationDuration == 0.0 {
-			animationsBlock()
-			validateViewSize()
-		}
-		else {
-			UIView.animate(withDuration: animationDuration, delay: 0.0, options: .beginFromCurrentState, animations: animationsBlock, completion: {(finished: Bool) -> Void in
-				if finished {
-					self.validateViewSize()
-				}
-			})
-		}
+		self.visibleKeyboardHeight = 0.0
 	}
 	
 	internal func updateInputFormViewContentOffsetAnimated(_ animated: Bool) {
@@ -273,7 +255,9 @@ open class NKInputFormViewController: UIViewController, UIScrollViewDelegate {
 			contentOffset = CGPoint(x: 0.0, y: value)
 		}
 		
-		inputFormView?.setContentOffset(contentOffset, animated: animated)
+		if let formView = inputFormView, formView.contentOffset.y != contentOffset.y {
+			formView.setContentOffset(contentOffset, animated: animated)
+		}
 	}
 	
 	public var visibleKeyboardHeight : CGFloat = 0 {
@@ -347,9 +331,9 @@ extension NKInputFormViewController: UITextFieldDelegate {
 	}
 	
 	open func textFieldDidBeginEditing(_ textField: UITextField) {
-		if visibleKeyboardHeight > 0 {
-			updateInputFormViewContentOffsetAnimated(true)
-		}
+//		if visibleKeyboardHeight > 0 {
+//			updateInputFormViewContentOffsetAnimated(true)
+//		}
 	}
 	
 	open func textFieldShouldReturn(_ textField: UITextField) -> Bool {
